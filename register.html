@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+        
+        #mid {
+            width: 100%;
+            height: 70%;
+            position: relative;
+            text-align: center;
+        }
+        
+        #mid .login {
+            width: 360px;
+            height: 400px;
+            background-color: #cecece;
+            position: absolute;
+            border: #999;
+            transform: translate(-180px);
+            left: 50%;
+            top: 100px;
+            padding-top: 40px;
+        }
+        
+        #mid .login p {
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+        
+        #mid .login input {
+            width: 300px;
+            height: 40px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px 10px 10px 10px;
+            border: 1px solid #c4c7ce;
+            outline: 0;
+            padding-left: 10px;
+        }
+        
+        #mid .login input:focus {
+            border-color: #4e6ef2;
+            box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, .7);
+        }
+        
+        #mid .login button {
+            width: 300px;
+            height: 40px;
+            background-color: lightblue;
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+            border: none;
+            outline: 0;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        #footer {
+            width: 100%;
+            height: 10%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="mid">
+        <div class="login">
+            <p>注册账号</p>
+            <input type="text" placeholder="请输入用户名"><br>
+            <input type="password" placeholder="请输入密码"><br>
+            <button>注册</button>
+            <button>登录</button>
+
+
+
+        </div>
+    </div>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script>
+        var flag = false;
+        var flag1 = false;
+        var rig = /^[a-zA-Z_]\w{5,11}$/;
+        var oinput = document.querySelectorAll("input");
+        oinput[0].onchange = function() {
+            var val = this.value;
+            if (rig.test(val)) {
+                flag = true;
+            } else {
+                alert("账号格式不正确");
+                flag = false;
+            }
+        }
+        var reg = /^[0-9A-Za-z]{6,10}$/;
+        oinput[1].onchange = function() {
+            var val = this.value;
+            if (reg.test(val)) {
+                flag1 = true;
+            } else {
+                alert("密码格式不正确");
+                flag1 = false;
+            }
+        }
+        $("button").eq(0).click(function() {
+            if (flag && flag1) {
+                $.get("http://jx.xuzhixiang.top/ap/api/reg.php", {
+                    username: $("input").eq(0).val(),
+                    password: $("input").eq(1).val()
+                }, data => {
+                    if (data.msg.length == 4) {
+                        alert(data.msg);
+                    } else {
+                        alert("用户名已存在请更换");
+                    }
+                })
+            }
+        });
+        $("button").eq(1).click(function() {
+            location.href = "login.html";
+        });
+    </script>
+</body>
+
+</html>
+
+</html>

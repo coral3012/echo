@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/detail.css">
+</head>
+
+<body>
+
+
+    <section id="detail" class="fang">
+
+
+    </section>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script>
+        $(function() {
+
+            $.get("json/car.json", data => {
+
+                let p = (location.search.split("=")[1] - 1);
+                // console.log(data);
+
+                var odetail = document.getElementById("detail")
+                var str = ""
+                str += `
+<section class="left fl">
+    <div id='small'>
+        <img src="${data[p]["imgurl"]}" />
+        <div id='mark'></div>
+    </div>
+    <div id='big'>
+        <img src="${data[p]["imgurl"]}" />
+    </div>
+</section><section class="right fl">
+<div class="weap">
+    <p>${data[p].tit1}</p>
+    <p>￥${data[p].price}元</p>
+    <span>-</span>
+    <input type="text" value="1">
+    <span>+</span><br><br><br>
+    <input type="button" value="加入购物车"></div>
+</section>
+<a href="cart.html">
+<div class="gouwuche">我的购物车</div>
+</a>`
+
+                odetail.innerHTML = str;
+                $("#small").mouseenter(function() {
+                    $("#mark,#big").show()
+                }).mouseleave(function() {
+                    $("#mark,#big").hide()
+                }).mousemove(function(ev) {
+                    var l = ev.pageX - $(this).offset().left - 50;
+                    var t = ev.pageY - $(this).offset().top - 50;
+                    if (l <= 0) {
+                        l = 0;
+                    }
+                    if (l >= 200) {
+                        l = 200;
+                    }
+
+                    if (t <= 0) {
+                        t = 0;
+                    }
+                    if (t >= 200) {
+                        t = 200;
+                    }
+                    $("#mark").css({
+                        left: l,
+                        top: t
+                    })
+                    $("#big img").css({
+                        left: -4 * l,
+                        top: -4 * t
+                    })
+                });
+                var ospan = document.querySelectorAll("span");
+                var oinput = document.querySelectorAll("input")
+                ospan[1].onclick = function() {
+                    oinput[0].value++;
+                }
+                ospan[0].onclick = function() {
+                    oinput[0].value--;
+                    if (oinput[0].value <= 0) {
+                        oinput[0].value = 1;
+                    }
+                }
+                oinput[0].onchange = function() {
+                    if (oinput[0].value <= 0) {
+                        oinput[0].value = 1;
+                    }
+                }
+                $("input").eq(1).click(function() {
+                    var p = location.search.split("=")[1];
+
+                    var shop = JSON.parse(localStorage.getItem("gg"));
+
+                    // console.log(shop)
+                    var flag = false;
+                    for (var arr in shop) {
+
+                        if (shop[arr]["id"] == p) {
+                            shop[arr]["num"] = (shop[arr]["num"] - 0) + (oinput[0].value - 0);
+                            flag = true;
+                        }
+
+
+
+                    }
+                    if (!flag) {
+                        shop.push({
+                            "id": p,
+                            "num": oinput[0].value
+
+                        })
+                    }
+                    localStorage.setItem("gg", JSON.stringify(shop));
+                    alert("添加购物车成功。")
+                    var ss = JSON.parse(localStorage.getItem("gg"));
+                    console.log(ss);
+                })
+            })
+        })
+    </script>
+    <script src="js/goods1.js"></script>
+
+
+</body>
+
+</html>

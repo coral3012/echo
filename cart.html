@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 1190px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        table td {
+            height: 50px;
+            line-height: 87px;
+            border-top: 1px gray solid;
+            border-bottom: 1px gray solid;
+            text-align: center;
+            width: 200px;
+        }
+        
+        table td:nth-of-type(1) {
+            box-sizing: border-box;
+            padding: 12px;
+        }
+        
+        table td:nth-of-type(3) {
+            font-size: 10px;
+            line-height: 25px;
+        }
+        
+        table td:nth-of-type(9) {
+            cursor: pointer;
+        }
+        
+        table td:nth-of-type(5) {
+            cursor: pointer;
+        }
+        
+        table td:nth-of-type(7) {
+            cursor: pointer;
+        }
+        
+        table td img {
+            width: 50px;
+            /* margin: auto 0; */
+            display: block;
+            /* height: 65px; */
+        }
+        
+        .weap {
+            width: 1190px;
+            height: 50px;
+            margin: 0 auto;
+        }
+        
+        a {
+            width: 100px;
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            text-decoration: none;
+            color: red;
+            float: left;
+            margin-left: 20px;
+        }
+        
+        .box1 {
+            width: 1190px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: sticky;
+            bottom: 0;
+            background: white;
+        }
+        
+        .zongjia {
+            float: left;
+            width: 200px;
+            line-height: 50px;
+            text-align: center;
+            color: red;
+            cursor: pointer;
+            margin-left: 100px;
+        }
+        
+        .jiesuan {
+            float: right;
+            width: 100px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            margin-right: 100px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/cart.js"></script>
+    <div class="weap"><a href="index.html">返回主页</a></div>
+
+    <table id="tabble">
+    </table>
+    <div class="box1">
+        <div class="zongjia">总价:0元</div>
+        <div class="jiesuan">去结算</div>
+    </div>
+
+
+</body>
+
+</html>
